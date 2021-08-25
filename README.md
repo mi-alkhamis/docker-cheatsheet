@@ -2,11 +2,11 @@
 [![GitHub license](https://img.shields.io/github/license/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/network)
 [![GitHub issues](https://img.shields.io/github/issues/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/issues)
-# docker-cheatsheet
+# Docker Cheatsheet
 
-### intro
+### Intro
 
-in this cheatsheet we review most used docker commands with their examples.
+in this cheat sheet, we review the most used docker commands with their examples.
 
 
 
@@ -18,13 +18,13 @@ in this cheatsheet we review most used docker commands with their examples.
 
 - Kill a container
 
-  - first create a container 
+  - first, create a container 
 
   ```bash
   milad@docker:~$ docker run  -dit --name alpine alpine
   16afe7be3cb98004a4deb6411d470e04e1c0dea2a04b3047c3e239b7ef87accf
   ```
-  - check running continer
+  - check the running container
   ```bash
   milad@docker:~$ docker ps
   CONTAINER ID   IMAGE     COMMAND     CREATED         STATUS         PORTS     NAMES
@@ -32,7 +32,7 @@ in this cheatsheet we review most used docker commands with their examples.
   ```
   
   
-   - Send KILL signal to container
+   - Send KILL signal to the container
     ```bash
     milad@docker:~$ docker kill alpine 
     alpine
@@ -47,7 +47,7 @@ in this cheatsheet we review most used docker commands with their examples.
 
     
 
-- Create a image from running container
+- Create an image from the running container
 
   - Run a container of alpine
 
@@ -72,7 +72,7 @@ in this cheatsheet we review most used docker commands with their examples.
     / # exit
     ```
 
-  - Create a new image (my-nginx) from alpine container
+  - Create a new image (my-nginx) from the container
 
     ```bash
     milad@docker:~$ docker commit alpine  my-nginx
