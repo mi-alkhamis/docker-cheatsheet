@@ -1,3 +1,7 @@
+[![](https://img.shields.io/badge/dwclass-dev--004--git-brightgreen?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/README.md)
+[![GitHub license](https://img.shields.io/github/license/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/LICENSE)
+[![GitHub forks](https://img.shields.io/github/forks/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/network)
+[![GitHub issues](https://img.shields.io/github/issues/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/issues)
 # docker-cheatsheet
 
 ### intro
@@ -152,8 +156,11 @@ All contributions are welcome:
 - Request a new topic creating a New issue with the enhancement tag.
 - Find any kind of errors in the cheat sheet and create a New issue with the details or fork the project and do a Pull Request.
 
-## 
+
 
 ## License
 
-This project is licensed under the Apache-2.0 License  - see the [LICENSE](https://github.com/mi-alkhamis/script-runner/blob/main/LICENSE) file for details.
+This project is licensed under the Apache-2.0 License  - see the [LICENSE](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/LICENSE) file for details.
+
+
+[@dwsclass](https://github.com/dwsclass) dws-ops-005-docker
