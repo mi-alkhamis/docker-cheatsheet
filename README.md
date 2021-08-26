@@ -1,7 +1,10 @@
 [![](https://img.shields.io/badge/dwclass-dev--004--git-brightgreen?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/README.md)
+[![](https://img.shields.io/badge/dwclass-dev--005--git-brightgreen?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/README.md)
+
 [![GitHub license](https://img.shields.io/github/license/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/network)
 [![GitHub issues](https://img.shields.io/github/issues/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/issues)
+
 # Docker Cheatsheet
 
 ### Intro
@@ -14,14 +17,90 @@ in this cheat sheet, we review the most used docker commands with their examples
 
   You should have at least docker 20 :smile: !!!
 
+
+
 ### Commands
 
-- Kill a container
-
-  - first, create a container 
+- Run Nginx container and show Docker version and exposed ports
 
   ```bash
-  milad@docker:~$ docker run  -dit --name alpine alpine
+  milad@docker:~$ docker pull nginx
+  Using default tag: latest
+  latest: Pulling from library/nginx
+  Digest: sha256:4d4d96ac750af48c6a551d757c1cbfc071692309b491b70b2b8976e102dd3fef
+  Status: Image is up to date for nginx:latest
+  docker.io/library/nginx:latest
+  milad@docker:~$ docker inspect nginx:latest |jq .[0].DockerVersion
+  "20.10.7"
+  milad@docker:~$ docker inspect nginx:latest |jq .[0].Config.ExposedPorts
+  {
+    "80/tcp": {}
+  }
+  milad@docker:~$ 
+  ```
+
+  
+
+- Make an new image from Nginx
+
+  ```bash
+  milad@docker:~$ docker save -o nginx.tar.gz nginx
+  milad@docker:~$ docker rm -f nginx 
+  nginx
+  milad@docker:~$ docker import nginx.tar.gz  nginx:v1.20.0-test
+  sha256:87391bef9551b8bc6d4995399f4e5fa91ccffcef76abe53c402f54682fd3fb75
+  milad@docker:~$ docker images
+  REPOSITORY         TAG            IMAGE ID       CREATED          SIZE
+  nginx              v1.20.0-test   87391bef9551   5 seconds ago    137MB
+  nginx              latest         dd34e67e3371   8 days ago       133MB
+  ```
+
+  
+
+- Publish 8081 port to Nginx container
+
+  ```bash
+  milad@docker:~$ docker run --rm -dit -p 8081:80 --name nginx nginx
+  c836cd3ae2f72d68ea66192f01073608154bd065b2b5a16be93cb3861c0bd61c
+  
+  ```
+
+  
+
+- Show processes of conatainer
+
+  ```bash
+  milad@docker:~$ docker top nginx
+  CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+  c836cd3ae2f7   nginx     0.00%     6.836MiB / 980.6MiB   0.70%     2.35kB / 1.84kB   13.9MB / 16.4kB   5
+  
+  ```
+
+  Or
+
+  ```bash
+  milad@docker:~$ docker top nginx
+  UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+  root                8307                8285                0                   09:32               pts/0               00:00:00            nginx: master process nginx -g daemon off;
+  systemd+            8377                8307                0                   09:32               pts/0               00:00:00            nginx: worker process
+  systemd+            8378                8307                0                   09:32               pts/0               00:00:00            nginx: worker process
+  systemd+            8379                8307                0                   09:32               pts/0               00:00:00            nginx: worker process
+  systemd+            8380                8307                0                   09:32               pts/0               00:00:00            nginx: worker process
+  
+  ```
+
+  
+
+- remove dangling images
+
+  `docker image prune`
+
+  `docker image rm image-name`
+
+- - first, create a container 
+
+  ```bash
+milad@docker:~$ docker run  -dit --name alpine alpine
   16afe7be3cb98004a4deb6411d470e04e1c0dea2a04b3047c3e239b7ef87accf
   ```
   - check the running container
@@ -44,7 +123,7 @@ in this cheat sheet, we review the most used docker commands with their examples
     16afe7be3cb9   alpine     "/bin/sh"   20 seconds ago   Exited (137) 6 seconds ago             alpine 
     
     ```
-
+  
     
 
 - Create an image from the running container
@@ -162,5 +241,6 @@ All contributions are welcome:
 
 This project is licensed under the Apache-2.0 License  - see the [LICENSE](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/LICENSE) file for details.
 
+[@dwsclass](https://github.com/dwsclass) dws-ops-004-docker
 
 [@dwsclass](https://github.com/dwsclass) dws-ops-005-docker
