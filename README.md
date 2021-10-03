@@ -1,8 +1,11 @@
 [![](https://img.shields.io/badge/dwclass-dev--004--git-brightgreen?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/README.md)
 [![](https://img.shields.io/badge/dwclass-dev--005--git-brightgreen?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/README.md)
-[![GitHub license](https://img.shields.io/github/license/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/LICENSE)
+[![](https://img.shields.io/badge/dwclass-dev--006--git-brightgreen?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/README.md)
+[![GitHub license](https://img.shields.io/github/license/mi-alkhamis/docker-cheatsheet?color=ff1020&style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/blob/main/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/network)
-[![GitHub issues](https://img.shields.io/github/issues/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/issues)
+[![GitHub issues](https://img.shields.io/github/issues/mi-alkhamis/docker-cheatsheet?color=blue&style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/issues)
+[![GitHub stars](https://img.shields.io/github/stars/mi-alkhamis/docker-cheatsheet?style=plastic)](https://github.com/mi-alkhamis/docker-cheatsheet/stargazers)
+
 
 # Docker Cheatsheet
 
@@ -22,7 +25,7 @@ in this cheat sheet, we review the most used docker commands with their examples
 
 - Run Nginx container and show Docker version and exposed ports
 
-  ```bash
+  ``` console
   milad@docker:~$ docker pull nginx
   Using default tag: latest
   latest: Pulling from library/nginx
@@ -35,14 +38,13 @@ in this cheat sheet, we review the most used docker commands with their examples
   {
     "80/tcp": {}
   }
-  milad@docker:~$ 
   ```
 
   
 
 - Make an new image from Nginx
 
-  ```bash
+  ```console
   milad@docker:~$ docker save -o nginx.tar.gz nginx
   milad@docker:~$ docker rm -f nginx 
   nginx
@@ -58,26 +60,24 @@ in this cheat sheet, we review the most used docker commands with their examples
 
 - Publish 8081 port to Nginx container
 
-  ```bash
+  ```console
   milad@docker:~$ docker run --rm -dit -p 8081:80 --name nginx nginx
   c836cd3ae2f72d68ea66192f01073608154bd065b2b5a16be93cb3861c0bd61c
-  
   ```
 
   
 
 - Show processes of conatainer
 
-  ```bash
-  milad@docker:~$ docker top nginx
+  ```console
+  milad@docker:~$ docker stats
   CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
   c836cd3ae2f7   nginx     0.00%     6.836MiB / 980.6MiB   0.70%     2.35kB / 1.84kB   13.9MB / 16.4kB   5
-  
   ```
 
   Or
 
-  ```bash
+  ```console
   milad@docker:~$ docker top nginx
   UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
   root                8307                8285                0                   09:32               pts/0               00:00:00            nginx: master process nginx -g daemon off;
@@ -85,7 +85,6 @@ in this cheat sheet, we review the most used docker commands with their examples
   systemd+            8378                8307                0                   09:32               pts/0               00:00:00            nginx: worker process
   systemd+            8379                8307                0                   09:32               pts/0               00:00:00            nginx: worker process
   systemd+            8380                8307                0                   09:32               pts/0               00:00:00            nginx: worker process
-  
   ```
 
   
@@ -96,32 +95,35 @@ in this cheat sheet, we review the most used docker commands with their examples
 
   `docker image rm image-name`
 
-- - first, create a container 
+ - first, create a container 
 
-  ```bash
-milad@docker:~$ docker run  -dit --name alpine alpine
+  ```console
+  milad@docker:~$ docker run  -dit --name alpine alpine
   16afe7be3cb98004a4deb6411d470e04e1c0dea2a04b3047c3e239b7ef87accf
   ```
   - check the running container
-  ```bash
+  
+  ```console
   milad@docker:~$ docker ps
   CONTAINER ID   IMAGE     COMMAND     CREATED         STATUS         PORTS     NAMES
   16afe7be3cb9   alpine    "/bin/sh"   5 seconds ago   Up 3 seconds             alpine
   ```
   
-  
    - Send KILL signal to the container
-    ```bash
-    milad@docker:~$ docker kill alpine 
-    alpine
-    ```
-   - Check container 
-    ```bash
+   
+   
+  ``` console
+  milad@docker:~$ docker kill -s SIGKILL alpine 
+  ```
+   
+    
+- Check container
+  
+    ```console
     milad@docker:~$ docker ps -a
     CONTAINER ID   IMAGE      COMMAND     CREATED          STATUS                       PORTS     NAMES
     16afe7be3cb9   alpine     "/bin/sh"   20 seconds ago   Exited (137) 6 seconds ago             alpine 
-    
-    ```
+      ```
   
     
 
@@ -129,14 +131,16 @@ milad@docker:~$ docker run  -dit --name alpine alpine
 
   - Run a container of alpine
 
-    ```bash
+    ```console
+    
     milad@docker:~$ docker run --rm -dit --name alpine alpine 
     c39b54f5050b09dc5f56a7a3ef4141bf764fdd4c3cea3f911483fbd6d97ee4c6
+    
     ```
 
-  - Install NGINX 
+  - Install NGINX on it (or anything you want)
 
-    ```bash
+    ```console
     milad@docker:~$ docker exec -it alpine sh
     / # apk add nginx
     fetch https://dl-cdn.alpinelinux.org/alpine/v3.14/main/x86_64/APKINDEX.tar.gz
@@ -147,28 +151,28 @@ milad@docker:~$ docker run  -dit --name alpine alpine
     Executing nginx-1.20.1-r3.post-install
     Executing busybox-1.33.1-r3.trigger
     OK: 7 MiB in 16 packages
-    / # exit
+    
     ```
 
-  - Create a new image (my-nginx) from the container
+  - Create a new image  by commit command from the container
 
-    ```bash
+    ```console
     milad@docker:~$ docker commit alpine  my-nginx
     sha256:c044d636a3b1005a79ba56e20b4f92e4f93fd6f254aa34820351dbe10ffc4eb4
     ```
 
   - List Images
 
-  ```bash
+  ```console
   milad@docker:~$ docker images
   REPOSITORY         TAG       IMAGE ID       CREATED         SIZE
   my-nginx           latest    c044d636a3b1   5 seconds ago   9.18MB
   alpine-nginx       0.1       c623dc02116a   27 hours ago    9.18MB
   ```
 
-- pause a container
+- Pause a container
 
-  ```bash
+  ```console
   milad@docker:~$ docker container pause alpine 
   alpine
   milad@docker:~$ docker ps
@@ -176,25 +180,23 @@ milad@docker:~$ docker run  -dit --name alpine alpine
   d915171187f6   alpine    "/bin/sh"   23 seconds ago   Up 20 seconds (Paused)             alpine
   ```
   
-- get Id of running container
+- Get a Container ID with `jq` command
 
-  - Get a Container ID with jq command
-
-  ```bash
+  ```console
   milad@docker:~$ docker container inspect  redis |jq .[0].Id
   "fa528402d91bb18b2b7fe2e3ac4180fb2383469d840b30f87b57b976747fedca"
   ```
 
 - Limit container resources
 
-  ```
+  ```console
   milad@docker:~$ docker run -d --rm --cpus 0.5 --cpuset-cpus 0,2 --memory 512mb --memory-swap 768mb --name nginx-cpu nginx
   
   ```
 
-- use environments variables
+- Use environments variables
 
-  ```bash
+  ```console
   milad@docker:~$ docker run --rm -dit -e CLASS=dws -e NAME=milad --name alpine alpine
   d3b7bd5982c491c01f38cd0883708839b2d39360350f8539d52219be9ebdc700
   milad@docker:~$ docker exec -it alpine sh
@@ -212,7 +214,7 @@ milad@docker:~$ docker run  -dit --name alpine alpine
   
 - Mount `/tmp` on `/data/` in `mount-volume` container 
 
-  ```bash
+  ```console
   milad@docker:~$ docker run --rm -dit -v /tmp:/data -w /data  --name mount-volume alpine
   ee16d9b91f641841da3bd8f88dec3180d7dde8a424a8ed2a2d538735ada54a7f
   milad@docker:~$ docker exec -it mount-volume sh
@@ -243,3 +245,5 @@ This project is licensed under the Apache-2.0 License  - see the [LICENSE](https
 [@dwsclass](https://github.com/dwsclass) dws-ops-004-docker
 
 [@dwsclass](https://github.com/dwsclass) dws-ops-005-docker
+
+[@dwsclass](https://github.com/dwsclass) dws-ops-006-docker
