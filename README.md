@@ -9,19 +9,19 @@
 
 # Docker Cheatsheet
 
-### Intro
+## Intro
 
 in this cheat sheet, we review the most used docker commands with their examples.
 
 
 
-### Requirements
+## Requirements
 
   You should have at least docker 20 :smile: !!!
 
 
 
-### Commands
+## Commands
 
 - Run Nginx container and show Docker version and exposed ports
 
@@ -226,7 +226,50 @@ in this cheat sheet, we review the most used docker commands with their examples
   
   ```
 
-  
+## Some Dcoker file  topics 
+
+**What's the Dockerfile**
+
+  A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build users can create
+  an automated build that executes several command-line instructions in succession.
+
+**Create a image from Commit 🆚 From Dockerfile**
+
+we can create a new image from both of them, but Dockerfile is the best way to create a new image
+
+**ENV 🆚 ARG**
+
+ENV, Set environment variables in the container created from that image
+ARG, like ENV is environment variables, but use when docker build a new image from the docker file
+
+**ENTRYPOINT 🆚 CMD**
+
+ENTRPOINT use to run the main app when container run, CMD takes an argument of it, but if ENTRYPOINT doesn't exist in the docker file CMD takes the main command and its argument
+
+**Expose 🆚 Publish**
+
+EXPOSE: to declare which ports use in the app
+PUBLISH: to bind a port to the exposed one, to have access to it from the outside of a container
+
+**RUN 🆚 ENTRYPOINT**
+
+Both of them takes commands to run them, 
+RUN, takes care of it when docker is building  an image, but ENTRYPOINT run a command when the container is starting up
+
+**ADD 🆚 COPY**
+
+both of them. use to add files to images, but add can able to handle URLs and also extract compressed files before adding them to the image 
+
+**FROM alpine:latest**
+
+Use alpine, latest version rootfs in an image, apps fell they run in alpine Linux 
+
+**VOLUME /data**
+
+tells docker this container needs persistent storage to keep /data in it, if we don't allocate to it, docker create an anonymous one and set it to /data on the container
+
+
+
 
 ## Contribute
 
